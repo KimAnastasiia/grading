@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Layout, notification } from "antd"
+import { Routes, Route, Navigate , useNavigate, useLocation } from "react-router-dom";
+import Marks from "./Marks";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  let { Header, Content, Footer } = Layout;
+  return(
+    <Layout style={{ minHeight: "100vh", padding:100 }}>
+      <Content style={{ padding: "20px 50px" }}>
+        
+          <Routes>
+            <Route path="/" element={<Marks/>}></Route>
+          </Routes>
+
+      </Content>
+      <Footer style={{ textAlign: "center" }}>Assistant for professors</Footer>
+  </Layout>
+  )
 }
 
 export default App;
