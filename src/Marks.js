@@ -1,8 +1,7 @@
-import { Button, Form, Input } from 'antd';
-import './App.css';
+import { Button, Form, Input, Typography, Flex  } from 'antd';
 
 function Marks() {
-
+  const { Title } = Typography;
   const onFinish = (values) => {
     console.log('Success:', values);
   };
@@ -19,7 +18,10 @@ function Marks() {
         span: 16,
         }}
         style={{
-        maxWidth: 600,
+        width: "60%",
+        backgroundColor:"white",
+        padding:100,
+        borderRadius:30
         }}
         initialValues={{
         remember: true,
@@ -28,6 +30,8 @@ function Marks() {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
     >
+        <Title level={2}>Add Mark</Title>
+
         <Form.Item
         label="Description"
         name="description"
@@ -61,7 +65,7 @@ function Marks() {
             span: 16,
         }}
         >
-        <Button type="primary" htmlType="submit">
+        <Button style={{backgroundColor:"#4870E0"}} type="primary" htmlType="submit">
             Send
         </Button>
 
