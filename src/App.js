@@ -3,6 +3,7 @@ import { Routes, Route, Navigate , useNavigate, useLocation } from "react-router
 import Marks from "./Marks";
 import MenuComponent from "./Menu";
 import MenuApiComponent from "./MenuApiComponent";
+import ListOfMarks from "./ListOfMarks";
 function App() {
   let { Header, Content, Footer } = Layout;
   return(
@@ -18,6 +19,9 @@ function App() {
         <Flex justify="center">
           <Routes>
             <Route path="/" element={<Marks/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/list" element={<ListOfMarks/>}></Route>
           </Routes>
           </Flex>
       </Content>

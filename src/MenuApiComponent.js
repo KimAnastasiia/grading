@@ -15,7 +15,7 @@ let MenuApiComponent = () => {
       </Flex>
 
       <Flex>
-        <Button size={"large"} shape="round" type="text" style={{ marginLeft: 10 }}>
+        <Button onClick={()=>{navigate("/list")}} size={"large"} shape="round" type="text" style={{ marginLeft: 10 }}>
           <Flex justify="space-between" align='center' style={{ width: 60, height: "100%" }}>
             All marks
           </Flex>
