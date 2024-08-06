@@ -1,5 +1,5 @@
 let Commons = {
-    baseUrl:"http://localhost:8090/v1/mark"
+    baseUrl:"http://localhost:8090"
 }
 
 export default Commons

@@ -17,7 +17,7 @@ let ListOfMarks = () => {
             return;
         }
         setLoading(true);
-        let response = await fetch(Commons.baseUrl)
+        let response = await fetch(Commons.baseUrl+"/v1/mark")
         if (response.ok) {
             let data = await response.json()
             setListOfMarks(data)

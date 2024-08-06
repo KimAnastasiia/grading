@@ -19,9 +19,6 @@ let MenuComponent = () => {
           Iniciar sesion
         </Button>
 
-        <Button onClick={()=>{navigate("/registration")}} type='text' size={size} style={{ marginLeft:10, color:"#4870E0"}}>
-          Registrarse
-        </Button>
       </Flex>
     </Flex>
   );
