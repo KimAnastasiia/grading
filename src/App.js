@@ -13,7 +13,8 @@ function App() {
 
       <Header style={{backgroundColor:"#E1B547"}}>
         <Flex align='center' justify="center" style={{ height:"100%", width:"100%"}}>
-          <MenuComponent/>
+        {!localStorage.getItem("access_token")&&<MenuComponent/>}
+        {localStorage.getItem("access_token")&&<MenuApiComponent/>}
         </Flex>
       </Header>
 

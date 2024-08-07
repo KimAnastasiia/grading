@@ -17,7 +17,18 @@ let ListOfMarks = () => {
             return;
         }
         setLoading(true);
-        let response = await fetch(Commons.baseUrl+"/v1/mark")
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+            console.error("No access token found");
+            setLoading(false);
+            return;
+        }
+        const response = await fetch(`${Commons.baseUrl}/v1/mark`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
+        });
         if (response.ok) {
             let data = await response.json()
             setListOfMarks(data)

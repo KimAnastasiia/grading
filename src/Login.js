@@ -1,10 +1,9 @@
 import React from 'react';
 import { Button, message, Form, Input } from 'antd';
 import { Flex, Radio } from 'antd';
-import { useGoogleLogin } from '@react-oauth/google';
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Commons from './Utility/url';
 
 const Login = () => {
 
@@ -13,16 +12,24 @@ const Login = () => {
     let navigate = useNavigate()
     const [messageApi, contextHolder] = message.useMessage();
 
-    useEffect(() => {
-        if (!localStorage.getItem("access_token")) {
-
-            //localStorage.removeItem("access_token");
-            navigate("/login")
-        }
-    }, []);
-
-    const onFinish = (values) => {
+    const login = async (values) => {
         console.log('Success:', values);
+        const response = await fetch(Commons.baseUrl+"/auth/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email:email,
+                password:password
+            }),
+        });
+        if(response.ok){
+            const data = await response.json();
+            console.log(data)
+            navigate("/list")
+            localStorage.setItem('access_token', data.token);
+        }
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -54,7 +61,7 @@ const Login = () => {
                         initialValues={{
                             remember: true,
                         }}
-                        onFinish={onFinish}
+                        onFinish={login}
                         onFinishFailed={onFinishFailed}
                         style={{ width: "100%", marginTop: "20px" }}
                     >
@@ -84,23 +91,27 @@ const Login = () => {
                             <Input.Password onChange={(e) => { setPassword(e.target.value) }} />
                         </Form.Item>
                         <Form.Item
-                            wrapperCol={{
-                                offset: 8,
-                                span: 16,
-                            }}
+                wrapperCol={{ span: 24 }} style={{ textAlign: 'center', marginBottom:60 }}
                         >
-                            <Button type="primary" htmlType="submit" >
-                                Submit
-                            </Button>
+                            <Flex align='top' justify='center' style={{ width: "100%", height: "40%" }}>
+                                <Button
+                                    type="primary" htmlType="submit"
+                                    style={{ width: "300px", height: 30, backgroundColor: "#E0B548", color: "white", fontSize: 17, border: "1px solid #4870E0" }}
+                                    shape="round"
+
+                                >
+                                    Submit
+                                </Button>
+                            </Flex>
                         </Form.Item>
                     </Form>
                     <Flex align='top' justify='center' style={{ width: "100%", height: "40%" }}>
                         <Button
                             onClick={() => { navigate("/registration") }}
-                            style={{ width: "300px", height: 50, backgroundColor: "#E0B548", color: "white", fontSize: 17, border: "1px solid #4870E0" }}
+                            style={{ width: "300px", height: 30,  fontSize: 17, border: "1px solid #4870E0" }}
                             shape="round"
                         >
-                            Sign up
+                            Registration
                         </Button>
                     </Flex>
                 </Flex>

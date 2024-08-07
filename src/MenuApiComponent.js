@@ -15,16 +15,18 @@ let MenuApiComponent = () => {
       </Flex>
 
       <Flex>
+      <Button type="primary" shape="round" size={"large"} style={{ backgroundColor: "#4A55A2", marginLeft: 10 }}>
+          + Crear
+        </Button>
         <Button onClick={()=>{navigate("/list")}} size={"large"} shape="round" type="text" style={{ marginLeft: 10 }}>
           <Flex justify="space-between" align='center' style={{ width: 60, height: "100%" }}>
             All marks
           </Flex>
         </Button>
 
-        <Button type="primary" shape="round" size={"large"} style={{ backgroundColor: "#4A55A2", marginLeft: 10 }}>
-          + Crear
+        <Button type="text" shape="round" size={"large"} style={{ marginLeft: 10 }} onClick={()=>{localStorage.clear();navigate("/login")}}>
+          Log out
         </Button>
-       
       </Flex>
     </Flex>
   );
