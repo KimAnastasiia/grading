@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Divider, Flex, Typography } from 'antd';
-import { CalendarOutlined } from '@ant-design/icons';
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 let MenuComponent = () => {
   const [size, setSize] = useState('large')

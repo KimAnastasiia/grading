@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Divider, Flex, Typography } from 'antd';
-import { CalendarOutlined } from '@ant-design/icons';
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 
 let MenuApiComponent = () => {
@@ -15,7 +14,7 @@ let MenuApiComponent = () => {
       </Flex>
 
       <Flex>
-      <Button type="primary" shape="round" size={"large"} style={{ backgroundColor: "#4A55A2", marginLeft: 10 }}>
+      <Button  onClick={()=>{navigate("/create")}} type="primary" shape="round" size={"large"} style={{ backgroundColor: "#4A55A2", marginLeft: 10 }}>
           + Crear
         </Button>
         <Button onClick={()=>{navigate("/list")}} size={"large"} shape="round" type="text" style={{ marginLeft: 10 }}>

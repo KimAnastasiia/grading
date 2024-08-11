@@ -1,14 +1,15 @@
 import React from 'react';
-import { Button, message, Form, Input } from 'antd';
+import { Button, message, Form, Input,InputNumber  } from 'antd';
 import { Flex, Radio } from 'antd';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
+const RegistrationStudent = () => {
 
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     let [fullName, setFullName] = useState("");
+    let [course, setCourse] = useState(1);
 
     let navigate = useNavigate()
 
@@ -35,7 +36,7 @@ const Registration = () => {
     };
     const createUser = async () => {
 
-            const response = await fetch("http://localhost:8090/auth/signup", {
+            const response = await fetch("http://localhost:8090/auth/signup/student", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +44,8 @@ const Registration = () => {
                 body: JSON.stringify({
                     email:email,
                     password:password,
-                    fullName:fullName
+                    fullName:fullName,
+                    course:course
                 }),
             });
             if(response.ok){
@@ -53,8 +55,6 @@ const Registration = () => {
                 navigate("/login")
 
             }
-
-
     };
     return (
         <Flex justify='center' align='center' style={{ height: "70vh", width: "100%" }}>
@@ -63,7 +63,7 @@ const Registration = () => {
 
 
                 <Flex align="center" justify='center' vertical style={{ width: "100%", height: "60%", }}>
-                    <h1>Create account</h1>
+                    <h1>Create account as Student</h1>
                     <Form
                         name="basic"
                         labelCol={{
@@ -80,6 +80,8 @@ const Registration = () => {
                         onFinishFailed={onFinishFailed}
                         style={{ width: "100%", marginTop: "20px" }}
                     >
+
+                        
                         <Form.Item
                             label="Full Name"
                             name="fullName"
@@ -92,7 +94,19 @@ const Registration = () => {
                         >
                             <Input onChange={(e) => { setFullName(e.target.value) }} />
                         </Form.Item>
+                        <Form.Item
+                            label="Course"
+                            name="course"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your course!',
+                                },
+                            ]}
+                        >
+                            <InputNumber min={1} max={4} type='number' onChange={(value) => { setCourse(value) }} />
 
+                        </Form.Item>
                         <Form.Item
                             label="Email"
                             name="email"
@@ -142,4 +156,4 @@ const Registration = () => {
     )
 }
 
-export default Registration;
+export default RegistrationStudent;
