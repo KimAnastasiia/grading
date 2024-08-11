@@ -9,6 +9,7 @@ import TypeOfAccount from "./TypeOfAccount";
 import RegistrationProfessor from "./RegistrationProfessor";
 import RegistrationStudent from "./RegistrationStudent";
 import MarkDetails from "./MarkDetails";
+import CreateSubject from "./CreateSubject";
 function App() {
   let { Header, Content, Footer } = Layout;
   return(
@@ -43,6 +44,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/registration" element={<TypeOfAccount/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/create_subject" element={<CreateSubject/>}></Route>
           </Routes>
           </Flex>
       </Content>

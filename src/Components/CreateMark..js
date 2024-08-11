@@ -1,14 +1,14 @@
-import { Button, Form, Input, Typography,message,Select,InputNumber  } from 'antd';
+import { Button, Form, Input, Typography,message,Select,InputNumber, Flex  } from 'antd';
 import { useEffect, useState } from "react";
 import Commons from '../Utility/url';
 import checkToken from '../Utility/CheckToken';
-
+import { useNavigate } from 'react-router-dom';
 function CreateMark() {
 
   const { Title } = Typography;
   let [sublects, setSublects] = useState([]);
   let [students, setStudents] = useState([]);
-
+  const navigate = useNavigate();
 
   let [studentId, setStudentId] = useState("");
   let [description, setDescription] = useState();
@@ -165,6 +165,7 @@ const postMark = async () => {
             },
         ]}
         >
+          <Flex>
             <Select
               showSearch
               placeholder="Select a subject"
@@ -173,7 +174,10 @@ const postMark = async () => {
               onSearch={onSearch}
               options={sublects}
             />
-
+          <Button onClick={()=>{navigate("/create_subject")}} type="primary">
+            add
+          </Button>
+      </Flex>
         </Form.Item>
 
         <Form.Item
