@@ -43,7 +43,7 @@ let getAllStudents = async () => {
 
 let getAllSubjects = async () => {
     
-    const response = await fetch(`${Commons.baseUrl}/v1/subject`, {
+    const response = await fetch(`${Commons.baseUrl}/users/me`, {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`
@@ -52,7 +52,7 @@ let getAllSubjects = async () => {
     if (response.ok) {
         let data = await response.json()
 
-        setSublects(data.map(item => ({
+        setSublects(data.subjects.map(item => ({
           value: item.id,
           label: item.name
       })))
@@ -134,6 +134,7 @@ const postMark = async () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
     >
+       {contextHolder}
         <Title level={2}>Add Mark</Title>
         <Form.Item
         label="Student name"
@@ -145,6 +146,7 @@ const postMark = async () => {
             },
         ]}
         >
+          <Flex>
          <Select
               showSearch
               placeholder="Select a student"
@@ -153,7 +155,10 @@ const postMark = async () => {
               onSearch={onSearch}
               options={students}
             />
-
+          <Button onClick={()=>{navigate("/professor/registration/student")}} type="primary">
+            add
+          </Button>
+          </Flex>
         </Form.Item>
         <Form.Item
         label="Subject"

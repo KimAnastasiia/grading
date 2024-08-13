@@ -3,6 +3,7 @@ import { Divider, List, Skeleton } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Commons from '../Utility/url';
 import { useNavigate } from 'react-router-dom';
+import checkToken from '../Utility/CheckToken';
 
 const ListOfMarks = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const ListOfMarks = () => {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState({}); // Store subject details
   const [students, setStudents] = useState({}); // Store student details
-  const token = localStorage.getItem('access_token');
+  const token = checkToken()
 
   useEffect(() => {
     getAllMarksOfProfessor();
@@ -105,9 +106,10 @@ const ListOfMarks = () => {
                 <a key="delete" style={{ color: "red" }}>delete</a>,
               ]}
               key={item.id}
+              onClick={() => navigate(`/details/${item.id}`)}
             >
               <List.Item.Meta
-                title={<a href="https://ant.design">{subjectName(item.subject)}</a>}
+                title={<a>{subjectName(item.subject)}</a>}
                 description={`Score: ${item.score}, Student: ${studentName(item.student)}`}
               />
               <div onClick={() => navigate(`/details/${item.id}`)}>Details</div>

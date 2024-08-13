@@ -4,7 +4,7 @@ import { Flex, Radio } from 'antd';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const RegistrationStudent = () => {
+const ProfessorRegistrStudent = () => {
 
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
@@ -50,9 +50,11 @@ const RegistrationStudent = () => {
             if(response.ok){
                 const data = await response.json();
                 console.log(data)
+                setEmail("")
+                setPassword("")
+                setCourse("")
+                setFullName("")
                 success()
-                navigate("/login")
-
             }
     };
     return (
@@ -62,7 +64,7 @@ const RegistrationStudent = () => {
 
 
                 <Flex align="center" justify='center' vertical style={{ width: "100%", height: "60%", }}>
-                    <h1>Create account as Student</h1>
+                    <h1>Create stuent account</h1>
                     <Form
                         name="basic"
                         labelCol={{
@@ -155,4 +157,4 @@ const RegistrationStudent = () => {
     )
 }
 
-export default RegistrationStudent;
+export default ProfessorRegistrStudent;

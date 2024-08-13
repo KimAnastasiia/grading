@@ -10,28 +10,37 @@ import RegistrationProfessor from "./RegistrationProfessor";
 import RegistrationStudent from "./RegistrationStudent";
 import MarkDetails from "./MarkDetails";
 import CreateSubject from "./CreateSubject";
+import ListOfSubjectsOfProfessor from "./ListOfSubjectsOfProfessor";
+import React, { useState, useEffect } from 'react';
+import ProfessorRegistrStudent from "./ProfessorRegistrStudent";
 function App() {
   let { Header, Content, Footer } = Layout;
+
+  let [logged, setLogged] = useState(localStorage.getItem("access_token"));
+
   return(
     <Layout style={{ minHeight: "100vh"}}>
 
       <Header style={{backgroundColor:"#E1B547"}}>
         <Flex align='center' justify="center" style={{ height:"100%", width:"100%"}}>
-        {!localStorage.getItem("access_token")&&<MenuComponent/>}
-        {localStorage.getItem("access_token")&&<MenuApiComponent/>}
+        {!logged&&<MenuComponent />}
+        {logged&&<MenuApiComponent setLogged={setLogged}/>}
         </Flex>
       </Header>
 
       <Content style={{ padding: "20px 50px" }}>
         <Flex justify="center">
           <Routes>
-            <Route path="/login" element={<Login/>}></Route>
+            <Route path="/login" element={<Login setLogged={setLogged}/>}></Route>
           </Routes>
           <Routes>
             <Route path="/registration/professor" element={<RegistrationProfessor/>}></Route>
           </Routes>
           <Routes>
             <Route path="/registration/student" element={<RegistrationStudent/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/professor/registration/student" element={<ProfessorRegistrStudent/>}></Route>
           </Routes>
           <Routes>
             <Route path="/list" element={<ListOfMarks/>}></Route>
@@ -47,6 +56,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/create_subject" element={<CreateSubject/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/my_subjects" element={<ListOfSubjectsOfProfessor/>}></Route>
           </Routes>
           </Flex>
       </Content>

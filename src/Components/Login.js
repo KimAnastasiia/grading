@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Commons from '../Utility/url';
 
-const Login = () => {
-
+const Login = (props) => {
+    let { setLogged } = props
     let [email, setEmail] = useState(false);
     let [password, setPassword] = useState(false);
     let navigate = useNavigate()
@@ -29,6 +29,7 @@ const Login = () => {
             console.log(data)
             navigate("/list")
             localStorage.setItem('access_token', data.token);
+            setLogged(true)
         }
     };
     const onFinishFailed = (errorInfo) => {
