@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import Commons from '../Utility/url';
 import checkToken from '../Utility/CheckToken';
-
+import { useNavigate } from 'react-router-dom';
 
 function MarkDetails() {
+  
   const { Title, Text } = Typography;
   const { markId } = useParams()
   const token = checkToken()
@@ -13,6 +14,7 @@ function MarkDetails() {
   const [professor, setProfessor] = useState({})
   const [student, setStudent] = useState({})
   const [subject, setSubject] = useState({})
+  const navigate = useNavigate();
   useEffect(() => {
     getMarkDetails()
     getProfessor()
@@ -79,6 +81,10 @@ function MarkDetails() {
   return (
     <Flex justify="center" align="center" style={{ width: "100%", height: "100vh" }}>
       <Flex vertical style={{ width: "50%", backgroundColor: "white", borderRadius: 30, padding: 30 }}>
+        <Flex vertical align='center' style={{ marginBottom: 16 }}>
+          <Title style={{textAlign:"center"}}>Mark details</Title>
+          <Button type='primary' onClick={()=>{navigate("/edit_mark/"+markId)}}>Edit</Button>
+        </Flex>
         <Flex align='center' style={{ marginBottom: 16 }}>
           <Title level={5} style={{ margin: 0 }}>Student name:</Title>
           <Text style={{ marginLeft: 8 }}> {student.fullName}</Text>

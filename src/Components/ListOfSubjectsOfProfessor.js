@@ -71,7 +71,6 @@ const ListOfSubjectsOfProfessor = () => {
             <List.Item
               actions={[
                 <a key="edit">edit</a>,
-                <a key="delete" style={{ color: 'red' }}>delete</a>,
               ]}
               key={item.id}
             >

@@ -12,14 +12,14 @@ let MenuApiComponent = (props) => {
       children: [
         {
           label: 
-          <a href="list" >
+          <a href="/list" >
             All my marks
           </a>
         },
        
         {
           label: 
-          <a  href="my_subjects">
+          <a  href="/my_subjects">
              All my subjects
           </a>
         },
@@ -55,19 +55,6 @@ let MenuApiComponent = (props) => {
           </a>
         },
         
-      ],
-    },
-    {
-      label: 'Edit...',
-      key: 'edit',
-      icon: <EditOutlined />,
-      children: [
-        {
-          label: 'Edit student'
-        },
-        {
-          label: 'Edit my subject'
-        },
       ],
     },
     {
