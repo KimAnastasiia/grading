@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Divider, List, Skeleton } from 'antd';
+import { Divider, List, Skeleton,message } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Commons from '../Utility/url';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ const ListOfMarks = () => {
   const [subjects, setSubjects] = useState({}); // Store subject details
   const [students, setStudents] = useState({}); // Store student details
   const token = checkToken()
-
+  const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     getAllMarksOfProfessor();
   }, []);
@@ -79,7 +79,25 @@ const ListOfMarks = () => {
   const studentName = (studentId) => {
     return students[studentId]?.fullName || 'Loading...';
   };
+   let deleteMark=async(id)=>{
 
+        let response = await fetch(Commons.baseUrl + `/v1/mark/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` },
+        })
+        if(response.ok){
+            messageApi.open({
+              type: "success",
+              content: 'You have successfully deleted a mark',
+          });
+        }else{
+          messageApi.open({
+            type: 'error',
+            content: 'Error, can not delete a mark',
+        });
+        }
+        
+    }
   return (
     <div
       id="scrollableDiv"
@@ -90,7 +108,7 @@ const ListOfMarks = () => {
         border: '1px solid rgba(140, 140, 140, 0.35)',
         width: "50%",
       }}
-    >
+    >{contextHolder}
       <InfiniteScroll
         dataLength={listOfMarks.length}
         loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
@@ -102,11 +120,10 @@ const ListOfMarks = () => {
           renderItem={(item) => (
             <List.Item
               actions={[
-                <a key="edit">edit</a>,
-                <a key="delete" style={{ color: "red" }}>delete</a>,
+                <a key="edit"  onClick={() => navigate(`/edit_mark/${item.id}`)}>edit</a>,
+                <a key="delete" onClick={() => deleteMark(item.id)} style={{ color: "red" }}>delete</a>,
               ]}
               key={item.id}
-              onClick={() => navigate(`/details/${item.id}`)}
             >
               <List.Item.Meta
                 title={<a>{subjectName(item.subject)}</a>}
