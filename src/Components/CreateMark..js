@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function CreateMark() {
 
   const { Title } = Typography;
-  let [sublects, setSublects] = useState([]);
+  let [subjects, setSubjects] = useState([]);
   let [students, setStudents] = useState([]);
   const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ let getAllSubjects = async () => {
     if (response.ok) {
         let data = await response.json()
 
-        setSublects(data.subjects.map(item => ({
+        setSubjects(data.subjects.map(item => ({
           value: item.id,
           label: item.name
       })))
@@ -79,7 +79,6 @@ const postMark = async () => {
       const data = await response.json();
       console.log(data)
       success()
-
   }
 };
   const onFinishFailed = (errorInfo) => {
@@ -136,55 +135,60 @@ const postMark = async () => {
     >
        {contextHolder}
         <Title level={2}>Add Mark</Title>
-        <Form.Item
-        label="Student name"
-        name="studentName"
-        rules={[
-            {
-            required: true,
-            message: 'Please input student name!',
-            },
-        ]}
-        >
-          <Flex>
-         <Select
-              showSearch
-              placeholder="Select a student"
-              optionFilterProp="label"
-              onChange={(v)=>{setStudentId(v)}}
-              onSearch={onSearch}
-              options={students}
-            />
-          <Button onClick={()=>{navigate("/professor/registration/student")}} type="primary">
-            add
-          </Button>
-          </Flex>
-        </Form.Item>
-        <Form.Item
-        label="Subject"
-        name="subject"
-        rules={[
-            {
-            required: true,
-            message: 'Please input subject!',
-            },
-        ]}
-        >
-          <Flex>
-            <Select
-              showSearch
-              placeholder="Select a subject"
-              optionFilterProp="label"
-              onChange={(value)=>{setSubjectId(value)}}
-              onSearch={onSearch}
-              options={sublects}
-            />
-          <Button onClick={()=>{navigate("/create_subject")}} type="primary">
-            add
-          </Button>
-      </Flex>
-        </Form.Item>
+        <Flex style={{width:"100%"}}>
+          <Form.Item
+          label="Student name"
+          name="studentName"
+          rules={[
+              {
+              required: true,
+              message: 'Please input student name!',
+              },
+          ]}
+          style={{width:"100%"}}
+          >
 
+          <Select
+                showSearch
+                placeholder="Select a student"
+                onChange={(v)=>{setStudentId(v)}}
+                onSearch={onSearch}
+                options={students}
+              />
+      
+    
+          </Form.Item>
+          <Button onClick={()=>{navigate("/professor/registration/student")}} type="primary">
+              add student
+          </Button>
+        </Flex>
+        <Flex style={{width:"100%"}}>
+          <Form.Item
+          label="Subject"
+          name="subject"
+          rules={[
+              {
+              required: true,
+              message: 'Please input subject!',
+              },
+          ]}
+          style={{width:"100%"}}
+          >
+          
+              <Select
+                showSearch
+                placeholder="Select a subject"
+                onChange={(value)=>{setSubjectId(value)}}
+                onSearch={onSearch}
+                options={subjects}
+              />
+          
+
+          </Form.Item>
+          <Button onClick={()=>{navigate("/create_subject")}} type="primary">
+            add subject
+          </Button>
+        </Flex>
         <Form.Item
         label="Score"
         name="score"
