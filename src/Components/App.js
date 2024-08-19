@@ -14,6 +14,7 @@ import ListOfSubjectsOfProfessor from "./ListOfSubjectsOfProfessor";
 import React, { useState, useEffect } from 'react';
 import ProfessorRegistrStudent from "./ProfessorRegistrStudent";
 import EditMark from "./EditMark";
+import EditSubject from "./EditSubject";
 function App() {
   let { Header, Content, Footer } = Layout;
 
@@ -63,6 +64,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/edit_mark/:markId" element={<EditMark/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/edit_subject/:subjectId" element={<EditSubject/>}></Route>
           </Routes>
           </Flex>
       </Content>

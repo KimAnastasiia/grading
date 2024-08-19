@@ -70,7 +70,7 @@ const ListOfSubjectsOfProfessor = () => {
           renderItem={(item) => (
             <List.Item
               actions={[
-                <a key="edit">edit</a>,
+                <a href={'/edit_subject/'+item.id} key="edit">edit</a>,
               ]}
               key={item.id}
             >
