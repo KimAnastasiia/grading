@@ -1,20 +1,21 @@
 import { Layout, Flex, Menu } from "antd"
 import { Routes, Route, Navigate , useNavigate, useLocation } from "react-router-dom";
-import MenuComponent from "./Menu";
-import MenuApiComponent from "./MenuApiComponent";
-import ListOfMarks from "./ListOfMarks";
-import Login from "./Login";
-import CreateMark from "./CreateMark.";
-import TypeOfAccount from "./TypeOfAccount";
-import RegistrationProfessor from "./RegistrationProfessor";
-import RegistrationStudent from "./RegistrationStudent";
-import MarkDetails from "./MarkDetails";
-import CreateSubject from "./CreateSubject";
-import ListOfSubjectsOfProfessor from "./ListOfSubjectsOfProfessor";
+
 import React, { useState, useEffect } from 'react';
-import ProfessorRegistrStudent from "./ProfessorRegistrStudent";
-import EditMark from "./EditMark";
-import EditSubject from "./EditSubject";
+import MenuComponent from "./Menu/Menu";
+import MenuApiComponent from "./Menu/MenuApiComponent";
+import Login from "./Authorization/Login";
+import ListOfMarks from "./Mark/ListOfMarks";
+import CreateMark from "./Mark/CreateMark";
+import CreateSubject from "./Subject/CreateSubject";
+import EditSubject from "./Subject/EditSubject";
+import ListOfSubjectsOfProfessor from "./Subject/ListOfSubjectsOfProfessor";
+import EditMark from "./Mark/EditMark";
+import MarkDetails from "./Mark/MarkDetails";
+import RegistrationProfessor from "./Authorization/RegistrationProfessor";
+import RegistrationStudent from "./Authorization/RegistrationStudent";
+import ProfessorRegistrStudentgistrStudent from "./Authorization/ProfessorRegistrStudentgistrStudent";
+import TypeOfAccount from "./Authorization/TypeOfAccount";
 function App() {
   let { Header, Content, Footer } = Layout;
 
@@ -42,7 +43,7 @@ function App() {
             <Route path="/registration/student" element={<RegistrationStudent/>}></Route>
           </Routes>
           <Routes>
-            <Route path="/professor/registration/student" element={<ProfessorRegistrStudent/>}></Route>
+            <Route path="/professor/registration/student" element={<ProfessorRegistrStudentgistrStudent/>}></Route>
           </Routes>
           <Routes>
             <Route path="/list" element={<ListOfMarks/>}></Route>

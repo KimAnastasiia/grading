@@ -1,7 +1,7 @@
 import { Button, Form, Input, Typography,message,Select,InputNumber, Flex  } from 'antd';
 import { useEffect, useState } from "react";
-import Commons from '../Utility/url';
-import checkToken from '../Utility/CheckToken';
+import Commons from '../../Utility/url';
+import checkToken from '../../Utility/CheckToken';
 import { useNavigate } from 'react-router-dom';
 function CreateMark() {
 

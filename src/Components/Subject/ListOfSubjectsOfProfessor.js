@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, List, Skeleton } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Commons from '../Utility/url';
+import Commons from '../../Utility/url';
 import { useNavigate } from 'react-router-dom';
-import checkToken from '../Utility/CheckToken';
+import checkToken from '../../Utility/CheckToken';
 
 const ListOfSubjectsOfProfessor = () => {
   const navigate = useNavigate();

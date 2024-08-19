@@ -1,5 +1,5 @@
 import { Typography, Input, Flex, Button, message } from 'antd';
-import checkToken from '../Utility/CheckToken';
+import checkToken from '../../Utility/CheckToken';
 import { useEffect, useState } from "react";
 
 function CreateSubject() {

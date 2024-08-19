@@ -1,8 +1,8 @@
 import { Button, Form, Divider, Typography, Flex, Input,message } from 'antd';
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import Commons from '../Utility/url';
-import checkToken from '../Utility/CheckToken';
+import Commons from '../../Utility/url';
+import checkToken from '../../Utility/CheckToken';
 
 function EditSubject() {
     const { subjectId } = useParams()
