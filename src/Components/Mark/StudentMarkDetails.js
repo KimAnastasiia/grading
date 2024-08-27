@@ -6,7 +6,7 @@ import checkToken from '../../Utility/CheckToken';
 import { useNavigate } from 'react-router-dom';
 import { StepBackwardOutlined } from '@ant-design/icons';
 
-function MarkDetails() {
+function StudentMarkDetails() {
   
   const { Title, Text } = Typography;
   const { markId } = useParams()
@@ -19,7 +19,7 @@ function MarkDetails() {
 
   useEffect(() => {
     getMarkDetails()
-    getProfessor()
+    getStudent()
   }, [])
 
   let getMarkDetails = async () => {
@@ -33,14 +33,14 @@ function MarkDetails() {
     if (response.ok) {
       let data = await response.json()
       setMark(data)
-      getStudent(data.student)
+      getProfessor(data.user)
       getSubject(data.subject)
     }
 
   }
-  let getProfessor = async () => {
+  let getProfessor = async (profId) => {
 
-    const response = await fetch(`${Commons.baseUrl}/users/me`, {
+    const response = await fetch(`${Commons.baseUrl}/users/professor/${profId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -66,9 +66,9 @@ function MarkDetails() {
     }
 
   }
-  let getStudent = async (studentId) => {
+  let getStudent = async () => {
 
-    const response = await fetch(`${Commons.baseUrl}/users/` + studentId, {
+    const response = await fetch(`${Commons.baseUrl}/users/me`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -83,10 +83,9 @@ function MarkDetails() {
   return (
     <Flex justify="center" align="center" style={{ width: "100%", height: "100vh" }}>
       <Flex vertical style={{ width: "50%", backgroundColor: "white", borderRadius: 30, padding: 30 }}>
-        <Button onClick={()=>{navigate("/marks")}} style={{width:"100px"}}><StepBackwardOutlined /></Button>
+        <Button onClick={()=>{navigate("/my_marks")}} style={{width:"100px"}}><StepBackwardOutlined /></Button>
         <Flex vertical align='center' style={{ marginBottom: 16 }}>
           <Title style={{textAlign:"center"}}>Mark details</Title>
-          <Button type='primary' onClick={()=>{navigate("/edit_mark/"+markId)}}>Edit</Button>
         </Flex>
         <Flex align='center' style={{ marginBottom: 16 }}>
           <Title level={5} style={{ margin: 0 }}>Student name:</Title>
@@ -127,4 +126,4 @@ function MarkDetails() {
   );
 }
 
-export default MarkDetails;
+export default StudentMarkDetails;

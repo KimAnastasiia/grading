@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Button, Divider, Modal, Menu  } from 'antd';
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import { EditOutlined, PlusOutlined, FormOutlined,AlignLeftOutlined,LogoutOutlined } from '@ant-design/icons';
-let MenuApiComponent = (props) => {
+let MenuStudentApiComponent = (props) => {
+    
   let { setLogged } = props
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState('mail');
@@ -20,57 +21,15 @@ let MenuApiComponent = (props) => {
 
   const items = [
     {
-      label: "Data",
-      key: 'data',
-      icon: <AlignLeftOutlined />,
-      children: [
-        {
-          label: 
-          <a href="/marks" >
-            All my marks
-          </a>
-        },
-       
-        {
-          label: 
-          <a  href="/my_subjects">
-             All my subjects
-          </a>
-        },
-        
-      ],
-    },
-    {
-      label: (
-        <a href="/create" >
-          Create mark
+      label:(
+        <a href="/my_marks" >
+         My marks
         </a>
       ),
-   
-      key: 'createMark',
-      icon: <PlusOutlined/>,
+      key: 'marks',
+      icon: <AlignLeftOutlined />
     },
-    {
-      label: 'Add...',
-      key: 'SubMenu',
-      icon: <FormOutlined />,
-      children: [
-        {
-          label: 
-          <a href="/professor/registration/student" >
-            Create new student
-          </a>
-        },
-       
-        {
-          label: 
-          <a href="/create_subject" >
-            Create new subject
-          </a>
-        },
-        
-      ],
-    },
+
     {
       label: (
         <a  onClick={()=>{setOpen(true)}}>log out </a>
@@ -101,4 +60,4 @@ return(
 )
 };
 
-export default MenuApiComponent;
+export default MenuStudentApiComponent;

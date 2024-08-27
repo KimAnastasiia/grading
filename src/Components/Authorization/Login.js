@@ -4,9 +4,13 @@ import { Flex, Radio } from 'antd';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Commons from '../../Utility/url';
+import checkToken from '../../Utility/CheckToken';
 
 const Login = (props) => {
+
     let { setLogged } = props
+    let { setRole } = props
+
     let [email, setEmail] = useState(false);
     let [password, setPassword] = useState(false);
     let navigate = useNavigate()
@@ -27,21 +31,48 @@ const Login = (props) => {
         if(response.ok){
             const data = await response.json();
             console.log(data)
-            navigate("/list")
+            getDataOfUser(data.token)
+            
             localStorage.setItem('access_token', data.token);
             setLogged(true)
+        }else{
+            error()
         }
     };
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
 
     };
+
     const error = () => {
         messageApi.open({
             type: 'error',
             content: 'This user does not exist',
         });
     };
+
+    let getDataOfUser = async (token) => {
+    
+        const response = await fetch(`${Commons.baseUrl}/users/me`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.ok) {
+            let data = await response.json()
+            setRole(data.role)
+            localStorage.setItem('user_role', data.role);
+            if(data.role){
+                navigate("/marks")
+            }else{
+                navigate("/my_marks")
+            }
+        }
+    
+    }
+
     return (
         <Flex justify='center' align='center' style={{ height: "70vh", width: "100%" }}>
             {contextHolder}

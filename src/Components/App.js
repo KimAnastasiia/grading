@@ -14,12 +14,16 @@ import EditMark from "./Mark/EditMark";
 import MarkDetails from "./Mark/MarkDetails";
 import RegistrationProfessor from "./Authorization/RegistrationProfessor";
 import RegistrationStudent from "./Authorization/RegistrationStudent";
-import ProfessorRegistrStudentgistrStudent from "./Authorization/ProfessorRegistrStudentgistrStudent";
+import ProfessorRegistrStudent from "./Authorization/ProfessorRegistrStudent.js";
 import TypeOfAccount from "./Authorization/TypeOfAccount";
+import MenuStudentApiComponent from "./Menu/MenuStudentApiComponent.js";
+import StudentListOfMarks from "./Mark/StudentListOfMarks.js";
+import StudentMarkDetails from "./Mark/StudentMarkDetails.js";
 function App() {
   let { Header, Content, Footer } = Layout;
 
   let [logged, setLogged] = useState(localStorage.getItem("access_token"));
+  let [role, setRole] = useState(localStorage.getItem("user_role"));
 
   return(
     <Layout style={{ minHeight: "100vh"}}>
@@ -27,14 +31,16 @@ function App() {
       <Header style={{backgroundColor:"#E1B547"}}>
         <Flex align='center' justify="center" style={{ height:"100%", width:"100%"}}>
         {!logged&&<MenuComponent />}
-        {logged&&<MenuApiComponent setLogged={setLogged}/>}
+      {  /*{logged&&role&&<MenuApiComponent setLogged={setLogged}/>}
+           {logged&&!role&&<MenuStudentApiComponent setLogged={setLogged}/>}*/}
+        {logged&&<MenuStudentApiComponent setLogged={setLogged}/>}
         </Flex>
       </Header>
 
       <Content style={{ padding: "20px 50px" }}>
         <Flex justify="center">
           <Routes>
-            <Route path="/login" element={<Login setLogged={setLogged}/>}></Route>
+            <Route path="/login" element={<Login setLogged={setLogged} setRole={setRole}/>}></Route>
           </Routes>
           <Routes>
             <Route path="/registration/professor" element={<RegistrationProfessor/>}></Route>
@@ -43,13 +49,19 @@ function App() {
             <Route path="/registration/student" element={<RegistrationStudent/>}></Route>
           </Routes>
           <Routes>
-            <Route path="/professor/registration/student" element={<ProfessorRegistrStudentgistrStudent/>}></Route>
+            <Route path="/professor/registration/student" element={<ProfessorRegistrStudent/>}></Route>
           </Routes>
           <Routes>
-            <Route path="/list" element={<ListOfMarks/>}></Route>
+            <Route path="/marks" element={<ListOfMarks/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/my_marks" element={<StudentListOfMarks/>}></Route>
           </Routes>
           <Routes>
             <Route path="/details/:markId" element={<MarkDetails/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/mark_details/:markId" element={<StudentMarkDetails/>}></Route>
           </Routes>
           <Routes>
             <Route path="/create" element={<CreateMark/>}></Route>

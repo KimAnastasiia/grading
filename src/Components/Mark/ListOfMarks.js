@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Divider, List, Skeleton,message } from 'antd';
+import { Divider, List, Skeleton,message,Modal } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Commons from '../../Utility/url';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,13 @@ const ListOfMarks = () => {
   useEffect(() => {
     getAllMarksOfProfessor();
   }, []);
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleCancel = () => {
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
 
   const getAllMarksOfProfessor = async () => {
     if (loading) return;
@@ -85,18 +92,20 @@ const ListOfMarks = () => {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` },
         })
+        setOpen(false);
         if(response.ok){
             messageApi.open({
               type: "success",
               content: 'You have successfully deleted a mark',
           });
+          getAllMarksOfProfessor()
         }else{
           messageApi.open({
             type: 'error',
             content: 'Error, can not delete a mark',
         });
         }
-        
+    
     }
   return (
     <div
@@ -121,12 +130,20 @@ const ListOfMarks = () => {
             <List.Item
               actions={[
                 <a key="edit"  onClick={() => navigate(`/edit_mark/${item.id}`)}>edit</a>,
-                <a key="delete" onClick={() => deleteMark(item.id)} style={{ color: "red" }}>delete</a>,
+                <a key="delete" onClick={showModal} style={{ color: "red" }}>delete</a>,
               ]}
               key={item.id}
             >
+                <Modal
+                  title="Delete mark"
+                  open={open}
+                  onOk={()=>deleteMark(item.id)}
+                  onCancel={handleCancel}
+                >
+                  <p>{`Are you sure you want to delete a mark ?`}</p>
+                </Modal>
               <List.Item.Meta
-                title={<a>{subjectName(item.subject)}</a>}
+                title={subjectName(item.subject)}
                 description={`Score: ${item.score}, Student: ${studentName(item.student)}`}
               />
               <div onClick={() => navigate(`/details/${item.id}`)}>Details</div>
