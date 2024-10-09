@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Divider, Modal, Menu  } from 'antd';
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
-import { EditOutlined, PlusOutlined, FormOutlined,AlignLeftOutlined,LogoutOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, FormOutlined,AlignLeftOutlined,LogoutOutlined } from '@ant-design/icons';
 let MenuApiComponent = (props) => {
   let { setLogged } = props
   const [open, setOpen] = useState(false);
@@ -19,6 +19,15 @@ let MenuApiComponent = (props) => {
   };
 
   const items = [
+    {
+      label: (
+        <a href="/profile">
+          Profile
+        </a>
+      ),
+      key: 'profile',
+      icon: <UserOutlined />
+    },
     {
       label: "Data",
       key: 'data',
@@ -96,7 +105,7 @@ return(
   >
     <p>Are you sure you want to log out of your account?</p>
   </Modal>
-  <Menu style={{width:"100%"}} onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+  <Menu style={{width:"100%"}} onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
 </> 
 )
 };

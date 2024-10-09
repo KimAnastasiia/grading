@@ -19,6 +19,7 @@ import TypeOfAccount from "./Authorization/TypeOfAccount";
 import MenuStudentApiComponent from "./Menu/MenuStudentApiComponent.js";
 import StudentListOfMarks from "./Mark/StudentListOfMarks.js";
 import StudentMarkDetails from "./Mark/StudentMarkDetails.js";
+import Profile from "./Profile.js";
 function App() {
   let { Header, Content, Footer } = Layout;
 
@@ -31,9 +32,9 @@ function App() {
       <Header style={{backgroundColor:"#E1B547"}}>
         <Flex align='center' justify="center" style={{ height:"100%", width:"100%"}}>
         {!logged&&<MenuComponent />}
-      {  /*{logged&&role&&<MenuApiComponent setLogged={setLogged}/>}
-           {logged&&!role&&<MenuStudentApiComponent setLogged={setLogged}/>}*/}
-        {logged&&<MenuStudentApiComponent setLogged={setLogged}/>}
+        {logged&&<MenuApiComponent setLogged={setLogged}/>}
+        
+        {/*logged&&<MenuStudentApiComponent setLogged={setLogged}/>*/}
         </Flex>
       </Header>
 
@@ -80,6 +81,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/edit_subject/:subjectId" element={<EditSubject/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/profile" element={<Profile/>}></Route>
           </Routes>
           </Flex>
       </Content>
