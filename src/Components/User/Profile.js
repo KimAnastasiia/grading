@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import checkToken from '../Utility/CheckToken';
-import Commons from '../Utility/url';
+import checkToken from '../../Utility/CheckToken';
+import Commons from '../../Utility/url';
 import { Avatar, Typography, Flex, Button, message, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-
+import { Routes, Route, Navigate , useNavigate, useLocation } from "react-router-dom";
 const Profile = () => {
     const token = checkToken()
     const [user, setUser] = useState({})
     const { Paragraph } = Typography;
     const [messageApi, contextHolder] = message.useMessage();
-
+    let navigate = useNavigate()
     useEffect(() => {
         getUser()
     }, []) 
@@ -65,7 +65,7 @@ const Profile = () => {
         setUser(prevMark => ({ ...prevMark, [name]: value.target.value }));
     };
     return (
-        <Flex style={{ width: "100%" }}>
+        <Flex style={{ width: "100%" }} justify='center'>
             {contextHolder}
             <Flex style={{ backgroundColor: "white", width: "70%", padding: 40, borderRadius: 30 }} vertical>
                 <Avatar style={{ marginBottom: 20 }} size={64} icon={<UserOutlined />} />
@@ -77,7 +77,7 @@ const Profile = () => {
                     course: {user.course}
                 </Paragraph>
                 <Button style={{marginBottom:10}} onClick={()=>{editProfile()}} type='primary'>Save</Button>
-                <Button>Change password</Button>
+                <Button onClick={()=>{navigate("/edit/password")}} >Change password</Button>
             </Flex>
         </Flex>
     );

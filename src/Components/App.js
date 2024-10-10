@@ -19,7 +19,8 @@ import TypeOfAccount from "./Authorization/TypeOfAccount";
 import MenuStudentApiComponent from "./Menu/MenuStudentApiComponent.js";
 import StudentListOfMarks from "./Mark/StudentListOfMarks.js";
 import StudentMarkDetails from "./Mark/StudentMarkDetails.js";
-import Profile from "./Profile.js";
+import Profile from "./User/Profile.js";
+import EditPassword from "./User/EditPassword.js";
 function App() {
   let { Header, Content, Footer } = Layout;
 
@@ -81,6 +82,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/edit_subject/:subjectId" element={<EditSubject/>}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/edit/password" element={<EditPassword/>}></Route>
           </Routes>
           <Routes>
             <Route path="/profile" element={<Profile/>}></Route>
